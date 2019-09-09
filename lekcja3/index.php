@@ -3,5 +3,4 @@
     require "plik.php";
 
     print $lel;
-
 ?> 

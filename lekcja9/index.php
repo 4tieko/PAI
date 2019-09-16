@@ -42,7 +42,7 @@
         echo "x<sub>1</sub>=$x1</br>";
         echo "x<sub>2</sub>=$x2";
     }else if($delta==0){
-        $x = (-($b))/2*$a;
+        $x = (-($b))/(2*$a);
         echo "Delta jest równa 0!";
         echo  "x=$x";
     }

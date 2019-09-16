@@ -30,15 +30,15 @@
 
     $a=-3;
     $b=4;
-    $c=1;
+    $c=-1;
 
-    $delta = ($b*$b)-4*$a*$c;
+    $delta = ($b*$b)-(4*$a*$c);
     
     if($a==0){
         echo "Równanie nie jest kwadratowe!";
     }else if($delta>0){
-        $x1 = (-($b)+sqrt($delta))/2*$a;
-        $x2 = (-($b)-sqrt($delta))/2*$a;
+        $x1 = (-($b)+sqrt($delta))/(2*$a);
+        $x2 = (-($b)-sqrt($delta))/(2*$a);
         echo "x<sub>1</sub>=$x1</br>";
         echo "x<sub>2</sub>=$x2";
     }else if($delta==0){

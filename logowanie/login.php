@@ -9,14 +9,14 @@
            $stmt -> bindParam(':userLogin', $login);
            $stmt -> bindParam(':userPassword', $pass);
            $stmt -> execute(); 
-           $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+           $result = $stmt->fetchAll(PDO::FETCH_OBJ);
            $size = $stmt->rowCount();
-           $data = array_values($result[0]);
+           $data = $result[0];
            if($size==1){
                session_start();
                $_SESSION['logged']=true;
-               $_SESSION['username']=$data[1];
-               $_SESSION['email']=$data[3];
+               $_SESSION['username']= $data->user_login;
+               $_SESSION['email']= $data->user_email;
                header('Location: /4TI/logowanie');
            }else{
                session_destroy();

@@ -12,7 +12,8 @@
 <body>
     <?php
     if(isset($_SESSION['logged'])){
-        echo 'logged as '.$_SESSION['username'].'';
+        echo 'Logged as: '.$_SESSION['username'].'</br>';
+        echo 'User email: '.$_SESSION['email'].'</br>';
         echo '
             <form action="logout.php" method="post">
                 <input type="submit" value="Logout">
@@ -22,7 +23,7 @@
         $error = "";
         if(isset($_GET['login_error'])){
             $error = '
-                <p style="color:red;">Wrong login or password</p>
+                <p style="color:red;">'.$_GET['login_error'].'</p>
             ';
         }
             echo '

@@ -9,7 +9,7 @@
     );
 
     foreach ($arr as $key => $value) {
-        echo "tab[$key] = $value </br>";
+        echo "$value </br>";
     }
 
 ?>

@@ -19,8 +19,8 @@
                $_SESSION['email']= $data->user_email;
                header('Location: /4TI/logowanie');
            }else{
-               session_destroy();
                $_SESSION['logged']=false;
+               header('Location: /4TI/logowanie?login_error=Zły login lub hasło!');
            }
         }
         catch(PDOException $e)
@@ -28,6 +28,6 @@
            echo 'Połączenie nie mogło zostać utworzone: ' . $e->getMessage();
         }
     }else{
-        header('Location: /4TI/logowanie?login_success=false&login_error=Podaj login lub hasło!');
+        header('Location: /4TI/logowanie?login_error=Podaj login lub hasło!');
     }
 ?>

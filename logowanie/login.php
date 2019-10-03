@@ -5,7 +5,7 @@
         try
         {
            $pdo = new PDO('mysql:host=localhost;dbname=4tidata', 'root', '');
-           $stmt = $pdo->prepare('SELECT * FROM users_data WHERE user_login=:userLogin AND user_password=:userPassword');
+           $stmt = $pdo->prepare('SELECT * FROM users WHERE user_login=:userLogin AND user_password=:userPassword');
            $stmt -> bindParam(':userLogin', $login);
            $stmt -> bindParam(':userPassword', $pass);
            $stmt -> execute(); 

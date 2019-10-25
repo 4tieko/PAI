@@ -10,7 +10,7 @@
             echo $row['telefon'].'</br>';
         }
 
-        $stmt->closeCursor();
+        $pdo=$stmt=null;
     }catch(PDOException $e){
         echo $e;
     }

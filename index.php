@@ -58,7 +58,7 @@ try{
     echo '</select></br>';
     echo '<input type="submit" value="Wyświetl">';
     echo '</form>';
-    $pdo=$first=null;
+    $pdo=$first=$count=null;
 }catch(PDOException $e){}
 
 ?>

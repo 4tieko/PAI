@@ -7,52 +7,60 @@
     <title>Document</title>
 </head>
 <body>
-
 <style>
+
     table,tr,td{
         border: 1px solid black;
     }
 </style>
 <?php
+
 try{
-    $pdo = new PDO('mysql:host=localhost;dbname=4tidata', 'root');
-    $stmt = $pdo->query('SELECT * FROM pc');
+    $pdo = new PDO('mysql:host=localhost;dbname=action;charset=utf8','root');
+    $count = $pdo->query('SELECT * FROM cennik');
+    $count = ceil(($count->rowCount())/25);
 
-    
-        echo '<table>';
-        echo '<tr>';
-        echo '<td>Nazwa Procesora</td>';
-        echo '<td>Typ Procesora</td>';
-        echo '<td>Częstotliwość</td>';
-        echo '<td>Cena</td>';
-        echo '<td></td>';
-        echo '</tr>';
-
-
-
-    foreach($stmt as $row){
-        echo '<tr>';
-        echo '<td>'.$row['nazwa_cpu'].'</td>';
-        echo '<td>'.$row['typ_cpu'].'</td>';
-        echo '<td>'.$row['freq_cpu'].'</td>';
-        echo '<td>'.$row['cena_cpu'].'zł </td>';
-        echo '<td><a href="/4ti/delete.php?id='.$row['id'].'"><button>Usuń</button></a></td>';
-        echo '</tr>';
+    echo '<table>';
+    echo '
+        <thead>
+        <tr>
+            <td>Nazwa Produktu</td>
+            <td>Cena NETTO</td>
+        </tr>
+        </thead>
+    ';
+    if(!isset($_GET['page']) || $_GET['page']==1){
+        $range = 0;
+    }else{
+        $range = $_GET['page']*25;
     }
+    $first = $pdo->query("SELECT `Nazwa produktu`,`Cena netto PLN` FROM cennik LIMIT $range,25");
+
+        foreach($first as $key=>$row){
+            echo '<tr>';
+            echo '<td>'.$row['Nazwa produktu'].'</td>';
+            echo '<td>'.$row['Cena netto PLN'].'</td>';
+            echo '</tr>';
+        }
 
     echo '</table>';
 
 
-}catch(PDOException $e){
-    echo $e;
-}
+    echo '<form method="get" action="/4ti/index.php">';
+    echo 'Strona: <select name="page">';
+    for($i=1;$i<$count;$i++){
+        if($_GET['page']==$i){
+            echo '<option selected value="'.$i.'">'.$i.'</option>';
+        }else{
+            echo '<option value="'.$i.'">'.$i.'</option>';
+        }
+    }
+    echo '</select></br>';
+    echo '<input type="submit" value="Wyświetl">';
+    echo '</form>';
+    $pdo=$first=null;
+}catch(PDOException $e){}
+
 ?>
-    <form action="/4ti/dodaj.php" method="post">
-    <input type="text" name="nazwa" placeholder="Nazwa Procesora">
-    <input type="text" name="typ" placeholder="Typ Procesora">
-    <input type="text" name="freq" placeholder="Częstotliwość Procesora">
-    <input type="number" name="cena" placeholder="Cena Procesora">
-<input type="submit" name="submit" value="Dodaj">
-</form>
 </body>
 </html>

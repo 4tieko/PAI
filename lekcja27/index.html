@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Document</title>
+</head>
+<body>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
+<style>
+
+    thead>tr>td{
+        font-weight: bold;
+    }
+
+    table,tr,td{
+        border: 1px solid black;
+    }
+
+</style>
+        <input type="text" id="search">
+
+        <div id="table">
+
+        </div>
+
+        <script>
+                const input = document.getElementById('search');
+                input.addEventListener('input',(e)=>{
+                    var delayTimer;
+                        clearTimeout(delayTimer);
+                        delayTimer = setTimeout(function() {
+                            $.get(`/4ti/search.php?search=${e.target.value}`,(data)=>{
+                                $('#table').empty()
+                                $('#table').append(data)
+                            })
+                        }, 2000);
+                })
+            </script>
+</body>
+</html>
